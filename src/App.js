@@ -1,6 +1,6 @@
 import { CiSearch } from "react-icons/ci";
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import { Button,Container, Col,Row} from 'react-bootstrap';
+import { Container, Col,Row} from 'react-bootstrap';
 import Search  from "./components/Search";
  
 function App() {
