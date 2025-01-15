@@ -5,7 +5,17 @@ import { Button,Container, Col,Row} from 'react-bootstrap';
 function App() {
   return (
     <div className="App">
+
         <Container>
+          <Row>
+            <Col>
+              <h1 className="text-center fw-light mt-">Search here<CiSearch/></h1>
+              <div className="d-grid gap-2">
+                  <Button size="sm">Hello</Button>
+              </div>
+            </Col>
+          </Row>
+
         <Row>
           <Col md={3}>
             <h3>Hello, bootstrap</h3>
@@ -21,9 +31,6 @@ function App() {
           </Col>
         </Row>
         </Container> 
-
-        <h1>Find me right now <CiSearch/></h1>
-        <Button>Hello</Button>
     </div>
   );
 }
