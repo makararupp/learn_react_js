@@ -1,6 +1,7 @@
 import { CiSearch } from "react-icons/ci";
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import { Button,Container, Col,Row} from 'react-bootstrap';
+import Search  from "./components/Search";
  
 function App() {
   return (
@@ -10,9 +11,12 @@ function App() {
           <Row>
             <Col>
               <h1 className="text-center fw-light mt-">Search here<CiSearch/></h1>
-              <div className="d-grid gap-2">
-                  <Button size="sm">Hello</Button>
-              </div>
+            </Col>
+          </Row>
+
+          <Row className="justify-content-center">
+            <Col md={3 }>
+            <Search/>
             </Col>
           </Row>
 
@@ -31,6 +35,7 @@ function App() {
           </Col>
         </Row>
         </Container> 
+
     </div>
   );
 }
