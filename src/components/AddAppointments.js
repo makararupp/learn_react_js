@@ -1,16 +1,23 @@
-import React from 'react'
-import { Card,Col,Row,Form, Button } from 'react-bootstrap'
+
+import { Card,Col,Row,Form, Button } from 'react-bootstrap';
+import { useState } from 'react';
 
 const AddAppointments = () => {
+    let [toggleForm, setToggleForm] = useState(false);
+
   return (
      <>
         <Col md="8">
             <Card className='mb-3'>
                 <Card.Header>
                     AddAppointments
+                    <Button size='sm' 
+                    className='small float-end' 
+                    onClick={() => {setToggleForm(!toggleForm)}}>+
+                    </Button>
                 </Card.Header>
-
-                <Card.Body>
+                {toggleForm && 
+                         <Card.Body>
                     <Form>
                     <Row className='mb-3'>
                         <Form.Group as={Col}>
@@ -42,7 +49,7 @@ const AddAppointments = () => {
                     <Button variant='primary'>Submit</Button>
                     </Form>
                 </Card.Body>
-
+                }
             </Card>
         </Col>
      </>
