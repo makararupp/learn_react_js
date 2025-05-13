@@ -9,13 +9,15 @@ const AddAppointments = () => {
                 <Card.Header>
                     AddAppointments
                 </Card.Header>
+
                 <Card.Body>
                     <Form>
                     <Row className='mb-3'>
                         <Form.Group as={Col}>
                             <Form.Label>First Name</Form.Label>
-                            <Form.Control type='text' placeholder='first nmae' />
+                            <Form.Control type='text' placeholder='first name' />
                         </Form.Group>
+                        
                         <Form.Group as={Col}>
                             <Form.Label>Last Name</Form.Label>
                             <Form.Control type='text' placeholder='last name' />
@@ -26,10 +28,12 @@ const AddAppointments = () => {
                         <Form.Label>Appointment date</Form.Label>
                         <Form.Control type='date' />
                     </Form.Group>
+
                     <Form.Group as={Col} className='mb-3'>
                         <Form.Label>Appointment time</Form.Label>
                         <Form.Control type='time' />
                     </Form.Group>
+
                     <Form.Group as={Col} className='mb-3'>
                         <Form.Label>Comments</Form.Label>
                         <Form.Control as='textarea' placeholder='comments' />
@@ -38,6 +42,7 @@ const AddAppointments = () => {
                     <Button variant='primary'>Submit</Button>
                     </Form>
                 </Card.Body>
+
             </Card>
         </Col>
      </>

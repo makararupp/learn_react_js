@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormControl, InputGroup, Dropdown, DropdownButton } from 'react-bootstrap'
 
-
+//jsut using arrow function 
 const DropDown = () =>{
     return(
       <>
@@ -14,7 +14,7 @@ const DropDown = () =>{
             <Dropdown.Divider />
             <Dropdown.Item href="#">Abount Me</Dropdown.Item>
          </DropdownButton>
-      </>
+      </> 
     )
 }
 
@@ -26,7 +26,7 @@ const Search = () => {
              <DropDown/>
         </InputGroup>
      </>
-  )
+  ) 
 }
 
 export default Search
