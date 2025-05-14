@@ -2,10 +2,26 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Col,Row,Card, ListGroup} from 'react-bootstrap';
 import Search  from "./components/Search";
 import AddAppointments from "./components/AddAppointments";
-import appointments from './data.json';
 import AppointmentInfo from './components/AppointmentInfo';
+import { useCallback, useEffect, useState } from 'react';
 
 function App() {
+  
+    let [appointments, setAppointmentList] = useState([]);
+
+    const fetchData = useCallback(() =>{
+      fetch('./data.json')
+      .then(response => response.json())
+      .then(data =>{
+        setAppointmentList(data);
+      });
+    },[])
+
+    useEffect(() =>{
+      fetchData()
+    },[fetchData])
+
+
   return (
     <div className="App">
         <Container>
@@ -16,11 +32,10 @@ function App() {
           </Row>
 
           <Row className="justify-content-center">
-            <Col md={4}>
-            <Search/>
-            </Col>
+              <Col md={4}>
+              <Search/>
+              </Col>
           </Row>
-
           <Row className="justify-content-center">
               <AddAppointments/>
           </Row>
