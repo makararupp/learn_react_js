@@ -8,6 +8,17 @@ import { useCallback, useEffect, useState } from 'react';
 function App() {
   
     let [appointments, setAppointmentList] = useState([]);
+    let [query, setQuery] = useState("");
+
+    const filteredAppointments = appointments.filter(
+     item =>{
+      return(
+        item.firstName.toLowerCase().includes(query.toLocaleLowerCase()) ||
+        item.lastName.toLowerCase().includes(query.toLocaleLowerCase()) ||
+        item.aptNotes.toLowerCase().includes(query.toLocaleLowerCase())
+      )
+     }
+    )
 
     const fetchData = useCallback(() =>{
       fetch('./data.json')
@@ -21,7 +32,6 @@ function App() {
       fetchData()
     },[fetchData])
 
-
   return (
     <div className="App">
         <Container>
@@ -33,7 +43,7 @@ function App() {
 
           <Row className="justify-content-center">
               <Col md={4}>
-              <Search/>
+              <Search query={query} onQueryChange={setQuery}  />
               </Col>
           </Row>
           <Row className="justify-content-center">
@@ -45,8 +55,15 @@ function App() {
               <Card className='mb-3'>
                   <Card.Header>Appointment</Card.Header>
                   <ListGroup variant='flush'>
-                    {appointments.map(appointments =>(
-                        <AppointmentInfo key={appointments.aptDate} appointments={appointments}/>
+                    {filteredAppointments.map(appointments =>(
+                        <AppointmentInfo key={appointments.id} appointments={appointments}
+                        onDeleteAppointments={
+                              appointmentId =>
+                              setAppointmentList(
+                                appointments.filter(
+                                  appointment => appointment.id !== appointmentId)
+                              )
+                            }/>
                    ))}
                   </ListGroup>
               </Card>
