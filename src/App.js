@@ -69,7 +69,9 @@ function App() {
               </Col>
           </Row>
           <Row className="justify-content-center">
-              <AddAppointments/>
+              <AddAppointments 
+              onSendAppointment={myAppointment => setAppointmentList([...appointments, myAppointment])}
+              lastId={appointments.reduce((max, item)=> Number(item.id) > max ? Number(item.id): max, 0)} />
           </Row>
           
           <Row className='justify-content-center'>
