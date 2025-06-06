@@ -4,11 +4,16 @@ import Search  from "./components/Search";
 import AddAppointments from "./components/AddAppointments";
 import AppointmentInfo from './components/AppointmentInfo';
 import { useCallback, useEffect, useState } from 'react';
+import { type } from '@testing-library/user-event/dist/type';
+import { or } from 'ajv/dist/compile/codegen';
 
 function App() {
   
     let [appointments, setAppointmentList] = useState([]);
     let [query, setQuery] = useState("");
+    let [sortBy , setSortBy] = useState("firstName");
+    let [orderBy, setOrderBy] = useState("asc");
+
 
     const filteredAppointments = appointments.filter(
      item =>{
@@ -18,8 +23,18 @@ function App() {
         item.aptNotes.toLowerCase().includes(query.toLocaleLowerCase())
       )
      }
-    )
+    ).sort((a, b) => {
+        let order = orderBy === "asc" ? 1 : -1;
 
+        const valA = a[sortBy]?.toLowerCase?.() || '';
+        const valB = b[sortBy]?.toLowerCase?.() || '';
+
+        if (valA < valB) return -1 * order;
+        if (valA > valB) return 1 * order;
+        return 0;
+      });
+
+      
     const fetchData = useCallback(() =>{
       fetch('./data.json')
       .then(response => response.json())
@@ -43,7 +58,14 @@ function App() {
 
           <Row className="justify-content-center">
               <Col md={4}>
-              <Search query={query} onQueryChange={setQuery}  />
+              <Search 
+              query={query}
+              onQueryChange={setQuery}
+              sortBy={sortBy}
+              onSortByChange={setSortBy}
+              order={orderBy}
+              onOrderByChange={setOrderBy}
+              />
               </Col>
           </Row>
           <Row className="justify-content-center">
@@ -63,7 +85,7 @@ function App() {
                                 appointments.filter(
                                   appointment => appointment.id !== appointmentId)
                               )
-                            }/>
+                      }/>
                    ))}
                   </ListGroup>
               </Card>

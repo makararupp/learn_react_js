@@ -1,24 +1,35 @@
-import React from 'react'
-import { FormControl, InputGroup, Dropdown, DropdownButton } from 'react-bootstrap'
+import React from 'react';
+import { Dropdown, DropdownButton, FormControl, InputGroup } from 'react-bootstrap';
+import {BsCheck2} from 'react-icons/bs';
 
 //jsut using arrow function 
-const DropDown = () =>{
+const DropDown = ({onSortByChange, sortBy, orderBy, onOrderByChange}) =>{
     return(
       <>
-         <DropdownButton 
-            variant="info"
-            title="Dropdown">
-            <Dropdown.Item href="#">Home</Dropdown.Item>
-            <Dropdown.Item href="#">Contant</Dropdown.Item>
-            <Dropdown.Item href="#">Service</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item href="#">Abount Me</Dropdown.Item>
-         </DropdownButton>
+      <DropdownButton variant="info" title="Sort">
+      <Dropdown.Item as="button" onClick={() => onSortByChange('firstName')}>
+        First Name {sortBy === 'firstName' && <BsCheck2 className="float-end" />}
+      </Dropdown.Item>
+      <Dropdown.Item as="button" onClick={() => onSortByChange('lastName')}>
+        Last Name {sortBy === 'lastName' && <BsCheck2 className="float-end" />}
+      </Dropdown.Item>
+      <Dropdown.Item as="button" onClick={() => onSortByChange('aptDate')}>
+        AptDate {sortBy === 'aptDate' && <BsCheck2 className="float-end" />}
+      </Dropdown.Item>
+      <Dropdown.Divider />
+
+        <Dropdown.Item as="button" onClick={() => onOrderByChange('asc')}>
+        Ascending {orderBy === 'asc' && <BsCheck2 className="float-end" />}
+      </Dropdown.Item>
+      <Dropdown.Item as="button" onClick={() => onOrderByChange('desc')}>
+        Descending {orderBy === 'desc' && <BsCheck2 className="float-end" />}
+      </Dropdown.Item>
+    </DropdownButton>
       </> 
     )
 }
 
-const Search = ({query, onQueryChange}) => {
+const Search = ({onOrderByChange, query,onSortByChange, onQueryChange, sortBy, setSortBy, orderBy, setOrderBy}) => {
   return (
      <>
         <InputGroup className="mb-3">
@@ -26,7 +37,12 @@ const Search = ({query, onQueryChange}) => {
                 onChange={event => onQueryChange(event.target.value)}
                   value={query}
                />
-             <DropDown />
+             <DropDown 
+          sortBy={sortBy}
+          onSortByChange={onSortByChange}
+          orderBy={orderBy}
+          onOrderByChange={onOrderByChange}
+            />
         </InputGroup>
      </>
   ) 
